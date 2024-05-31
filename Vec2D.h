@@ -2,50 +2,47 @@
 // Created by itsag on 5/29/2024.
 //
 
-#ifndef VECTORS_VEC2D_H
-#define VECTORS_VEC2D_H
+#ifndef VECTORS_Vec2DD_H
+#define VECTORS_Vec2DD_H
 
 
-#include<math.h>
-#include <exception>
-#include <iostream>
+#ifndef Vec2D_H
+#define Vec2D_H
 
-using namespace std;
+struct Vec2D {
+    float x;
+    float y;
 
-class Vec2D {
-public:
-    Vec2D() : x(0.0), y(0.0) {};
+    Vec2D();
 
-    Vec2D(double valueX, double valueY) : x(valueX), y(valueY) {};
+    Vec2D(float x, float y);
 
-    double magnitude() {
-        return std::sqrt((x * x) + (y * y));
-    }
+    ~Vec2D() = default;
 
-    void add(double vecX, double vecY) {
-        try {
-            Vec2D vector(vecX, vecY);
-            x += vecX;
-            y += vecY;
-        } catch (std::exception &e) {
-            std::cerr << e.what() << std::endl;
-        }
-    }
+    void Add(const Vec2D &v);
 
-    void substract(double vecX, double vecY) {
-        try {
-            Vec2D vector(vecX, vecY);
-            x -= vecX;
-            y -= vecY;
-        } catch (std::exception &e) {
-            std::cerr << e.what() << std::endl;
-        }
-    }
+    void Sub(const Vec2D &v);
 
-private:
-    double x;
-    double y;
+    void Scale(const float n);
+
+    Vec2D Rotate(const float angle) const;
+
+    float Magnitude() const;
+
+    float MagnitudeSquared() const;
+
+    Vec2D &Normalize();
+
+    Vec2D UnitVector() const;
+
+    Vec2D Normal() const;
+
+    float Dot(const Vec2D &v) const;
+
+    float Cross(const Vec2D &v) const;
 };
 
+#endif
 
-#endif //VECTORS_VEC2D_H
+
+#endif //VECTORS_Vec2DD_H
